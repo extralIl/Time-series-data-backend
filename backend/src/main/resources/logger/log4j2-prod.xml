@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="5">
+
+    <Properties>
+        <Property name="app" value="app-info.log"/>
+        <Property name="spring" value="spring-info.log"/>
+        <Property name="logDir" value="logDir"/>
+        <Property name="genericPattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        <Property name="genericFilePattern" value="%d{yyyy-MM-dd}-%i"/>
+    </Properties>
+
+    <Appenders>
+        <RollingRandomAccessFile name="appAppender" fileName="${logDir}/${app}"
+                                 filePattern="${logDir}/app-${genericFilePattern}.log.zip" append="true">
+            <PatternLayout pattern="${genericPattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1000000" compressionLevel="9"/>
+        </RollingRandomAccessFile>
+
+        <RollingRandomAccessFile name="springAppender" fileName="${logDir}/${spring}"
+                                 filePattern="${logDir}/spring-${genericFilePattern}.log.zip" append="true">
+            <PatternLayout pattern="${genericPattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1"/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1000000" compressionLevel="9"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+
+    <Loggers>
+        <asyncRoot level="info">
+            <AppenderRef ref="appAppender"/>
+        </asyncRoot>
+
+        <!--手动打印的日志-->
+        <asyncLogger name="com.acmclub.neuq.backend" level="info" additivity="false">
+            <AppenderRef ref="appAppender"/>
+        </asyncLogger>
+
+        <!--spring日志-->
+        <asyncLogger name="org.springframework" level="info">
+            <AppenderRef ref="springAppender"/>
+        </asyncLogger>
+    </Loggers>
+</Configuration>

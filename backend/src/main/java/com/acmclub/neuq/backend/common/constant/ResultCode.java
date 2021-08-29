@@ -7,4 +7,7 @@ package com.acmclub.neuq.backend.common.constant;
 public class ResultCode {
     public static final int UNKNOWN_ERROR = -100;
     public static final int SUCCESS = 0;
+    public static final int AUTHENTICATION_FAILED = 1001;
+    public static final int AUTHENTICATION_EXPIRED = 1001;
+    public static final int MISSING_PARAMETER = 1001;
 }

@@ -16,23 +16,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class BaseResp {
-    private Integer resultCode;
+    private Integer error_code;
     private String errorMsg;
     private Object data;
 
     public static BaseResp ok(Object data) {
-        return BaseResp.builder().resultCode(ResultCode.SUCCESS).data(data).build();
+        return BaseResp.builder().error_code(ResultCode.SUCCESS).data(data).build();
     }
 
     public static BaseResp fail(String errorMsg) {
-        return BaseResp.builder().resultCode(ResultCode.UNKNOWN_ERROR).errorMsg(errorMsg).build();
+        return BaseResp.builder().error_code(ResultCode.UNKNOWN_ERROR).errorMsg(errorMsg).build();
     }
 
     public static BaseResp fail(Integer resultCode, String errorMsg) {
-        return BaseResp.builder().resultCode(resultCode).errorMsg(errorMsg).build();
+        return BaseResp.builder().error_code(resultCode).errorMsg(errorMsg).build();
     }
 
     public static BaseResp fail(BaseException e) {
-        return BaseResp.builder().resultCode(e.getResultCode()).errorMsg(e.getErrorMsg()).build();
+        return BaseResp.builder().error_code(e.getResultCode()).errorMsg(e.getErrorMsg()).build();
     }
 }
