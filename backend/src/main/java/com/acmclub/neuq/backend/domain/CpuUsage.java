@@ -9,7 +9,7 @@ import com.acmclub.neuq.backend.domain.common.Component;
 public class CpuUsage extends Component {
 
     public static String getUsageQuery() {
-        return "1-sum(increase(node_cpu_seconds_total{mode=\"idle\"}[5m]))by(instance)/sum(increase(node_cpu_seconds_total[1m]))by(instance)";
+        return "1-sum(increase(node_cpu_seconds_total{mode=\"idle\"}[5m]))by (instance)/sum(increase(node_cpu_seconds_total[5m])) by (instance)";
     }
 
 }
